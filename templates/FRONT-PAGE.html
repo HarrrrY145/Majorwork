@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Code in Place Style</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;          /* vertical center */
+      justify-content: center;    /* push content to the right */
+      padding: 0 5vw;               /* some breathing room from right edge */
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    .content {
+      max-width: 620px;             /* controls how wide the text block is */
+      text-align: center;            /* right-align all text inside */
+      margin-left: 40vw;
+    }
+
+    .title {
+      font-size: clamp(2rem, 3vw, 10rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin: 0 0 1.2rem 0;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 1.6vw, 5rem);
+      font-weight: 400;
+      color: #374151;
+      margin: 0 0 2rem 0;
+      line-height: 1.4;
+    }
+/* ───────────────────────────────────────────────────── */
+/*          Individual button style | LOGIN PAGE         */
+/* ───────────────────────────────────────────────────── */
+    .buttonsFrontPage {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4rem;
+      justify-content: center;
+      margin-top: 2rem;
+      height: 5em;
+      width: 10em;
+      padding: 0 1.4em;         /* gives nice horizontal breathing room */
+      min-width: 100px;         /* your original target width — adjust if needed */
+      background: #ffffff00;
+      border: none;
+      border-radius: 12px;       /* modern & soft — change to 6px or 12px to taste */
+      /* Base neumorphic shadow */
+      box-shadow: 
+      5px  5px 15px #d3d3d3,
+      -5px -5px 15px #ffffff;
+
+      font-weight: 500;         /* usually looks better than normal weight */
+      color: #333;
+      cursor: pointer;
+
+      transition: all 0.25s ease; /* Transistion of effects like hover */
+      }
+
+      .buttonsFrontPage:hover {
+      box-shadow: 
+      10px  10px 25px #ababab, /* Creating a shadow above the button*/
+      -10px -10px 25px #dadada; /* Creating a shadow below the button*/
+      transform: translateY(-10px);
+      }
+      .buttonRow {
+        display: flex;
+        justify-content: center;
+        gap: 3rem; /* space between buttons */
+        margin-top: 2rem;
+      }
+
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="content">
+      <h1 class="title">PLACE HOLDER</h1>
+      
+      <p class="subtitle">
+        This is a random sentence which will be later be a discription of the website for users to read
+      </p>
+        <div class="buttonRow">
+        <form action="{{ url_for('LOGIN') }}" method="get">
+        <button class="buttonsFrontPage" type="submit">Login</button></form>
+
+        <form action="{{ url_for('REGISTER') }}" method="get">
+        <button class="buttonsFrontPage" type="submit">Register</button>
+        </form>
+        </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -6,9 +6,12 @@ from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
 import os
 from waitress import serve 
+import datatabase_Initiation as dbInit
+import database_Managment as dbHandler
 
 
-
+#Creating the Database
+dbInit.initdb()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)

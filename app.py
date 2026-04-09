@@ -11,7 +11,7 @@ import database_Managment as dbHandler
 
 
 #Creating the Database
-dbInit.initdb()
+dbInit.init_db()
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)

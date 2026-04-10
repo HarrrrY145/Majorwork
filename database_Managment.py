@@ -1,15 +1,16 @@
 import sqlite3 as sql
 import html
 import time
-import random 
+import random
+from flask_bcrypt import Bcrypt 
 
 #---------------- 
 # Inserting users
 #----------------
-def insertUser(username,hash):
+def insertUser(username,email,hash):
     con = sql.connect("database_Files/Database.db")
-    cur = con.cursor
+    cur = con.cursor()
 
-    cur.execute("INSERT INTO users (username,password) VALUES (?,?,?)", (username, hash,),)
+    cur.execute("INSERT INTO users (displayName,email,password) VALUES (?,?,?)", (username, email, hash),)
     con.commit()
     con.close()

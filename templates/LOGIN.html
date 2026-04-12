@@ -1,11 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - HSC-CodeMe</title>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(rgb(229, 228, 228), rgb(255, 255, 255));
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background-color: #fefefe;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      box-shadow: 10px 10px 30px #d3d3d3, -10px -10px 30px #ffffff;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      font-size: clamp(2rem, 3vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .login-container p {
+      color: #374151;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    input[type="username"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      box-shadow: inset 5px 5px 15px #d3d3d3, inset -5px -5px 15px #ffffff;
+      transition: all 0.25s ease;
+    }
+    input[type="username"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      box-shadow: inset 3px 3px 10px #ababab, inset -3px -3px 10px #ffffff;
+    }
+
+    .login-button {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(1rem, 1vw, 1.5rem);
+      background-color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 5px 5px 15px #d3d3d3, -5px -5px 15px #ffffff;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+      padding: 0.75rem 1rem;
+      transition: all 0.25s ease;
+    }
+
+    .login-button:hover {
+      box-shadow: 10px 10px 25px #ababab, -10px -10px 25px #dadada;
+      transform: translateY(-3px);
+    }
+
+    .register-link {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    .register-link a {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: clamp(1rem, 1vw, 2rem);
+      padding: 0.5em 0.5em;
+      background-color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 
+        5px 5px 15px #d3d3d3,
+        -5px -5px 15px #ffffff;
+      font-weight: 500;
+      color: #333;
+      transition: all 0.25s ease;
+    }
+  </style>
 </head>
+
 <body>
-    LOGIN PAGE
+  <div class="login-container">
+    <button class="back-button" onclick="history.back()">Back</button>
+
+    <h1>Login</h1>
+    <p>Welcome back! Sign in to continue learning.</p>
+
+    <form action="{{ url_for('LOGIN') }}" method="post">
+    
+    <input type="username" 
+     name="displayName" 
+     placeholder="Display Name" 
+     required>
+
+     <input type="email" 
+     name="email" 
+     placeholder="Email (education.nsw.gov.au)" 
+     required>
+
+     <input type="password"
+     name="password" 
+     placeholder="Password" 
+     required>
+
+      <button type="submit" class="login-button">Login</button>
+    </form>
+
+    <div class="register-link">
+      Don't have an account? <a href="{{ url_for('REGISTER') }}">Register</a>
+    </div>
+  </div>
 </body>
 </html>

@@ -25,14 +25,44 @@ bcrypt = Bcrypt(app)
 
 
 
+
 @app.route('/')
 def FRONTPAGE():
     return render_template('FRONT-PAGE.html')
 
-@app.route('/LOGIN')
-def LOGIN():
-    return render_template('LOGIN.html')
+@app.route('/HOMEPAGE')
+def HOMEPAGE():
+    return render_template('HOME-PAGE.html')
 
+#----------------------------------------------
+# Login 
+#----------------------------------------------
+@app.route('/LOGIN', methods={"POST","GET"})
+def LOGIN():
+    if request.method == "POST":
+        displayName=request.form["displayName"]
+        email=request.form["email"]
+        inserted_password=request.form["password"]
+
+        checked_user = dbHandler.retreiveUser(displayName,email,inserted_password)
+        
+        if checked_user:
+            return redirect(url_for('HOMEPAGE'))
+        
+    else:    
+        return render_template('LOGIN.html')
+    
+
+
+
+
+
+
+
+
+#----------------------------------------------
+# Registration 
+#----------------------------------------------
 @app.route('/REGISTER', methods={"POST","GET"})
 def REGISTER():
     if request.method == "POST":
@@ -54,6 +84,9 @@ def REGISTER():
 
 
     return render_template('REGISTER.html')
+
+
+
 
 if __name__ == '__main__':
     app.config["TEMPLATES_AUTO_RELOAD"] = True

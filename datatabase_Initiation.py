@@ -9,6 +9,15 @@ def init_db():
                     displayName TEXT NOT NULL UNIQUE,
                     email TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL
-                 ) """)
+                ) """)
+    
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS questions(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                question TEXT NOT NULL,
+                answer TEXT NOT NULL
+                ) """)
     con.commit()
     con.close()
+
+    

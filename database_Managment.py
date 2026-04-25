@@ -39,3 +39,17 @@ def retreiveUser(displayName,email,inserted_password):
     else:
         con.close()
         return False
+    
+#--------------------------
+# Checking exisiting emails
+#--------------------------
+def emailExists(email):
+    con = sql.connect("database_Files/Database.db")
+    cur = con.cursor()
+
+    query = "SELECT 1 FROM users WHERE EMAIL = ? LIMIT 1"
+    cur.execute(query,(email,))
+    exists = cur.fetchone() is not None
+
+    con.close()
+    return exists

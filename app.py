@@ -32,15 +32,9 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 bcrypt = Bcrypt(app)
 
-
-
-
 @app.route('/')
 def FRONTPAGE():
     return render_template('GENERIC/FRONT-PAGE.html')
-
-
-
 
 
 @app.route('/HOMEPAGE')
@@ -69,7 +63,7 @@ def MODULES():
 
 @app.route('/MESSAGE_BOARD')
 def MESSAGE_BOARD():
-    return render_template('TEACHER/MESSAGE_BOARD.html')
+    return render_template('TEACHER/CLASSROOM_MESSAGE_BOARD.html')
 
 #----------------------------------------------
 # Login 
@@ -92,6 +86,17 @@ def LOGIN():
     
 
 
+
+#----------------------------------------------
+# Class Message Board
+#----------------------------------------------
+# Adding texts to the database
+@app.route('/CLASSROOM_MESSAGE_BOARD', methods={"POST", "GET"})
+def add_message():
+    if request.method == "POST":
+        text = request.form.get('message')
+        dbHandler.add_Class_message(text)
+        return render_template("TEACHER/CLASSROOM_MESSAGE_BOARD.html")
 
 
 

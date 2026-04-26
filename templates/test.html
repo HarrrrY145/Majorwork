@@ -1,14 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>courses</title>
-
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Board</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700&display=swap');
@@ -27,424 +22,192 @@
 /* GLOBAL */
 *{
    font-family: 'Nunito', sans-serif;
-   margin:0; padding:0;
-   box-sizing: border-box;
-   outline: none; border:none;
-   text-decoration: none;
-}
-
-*::selection{
-   background-color: var(--main-color);
-   color:#fff;
-}
-
-html{
-   font-size: 62.5%;
-   overflow-x: hidden;
-}
-
-html::-webkit-scrollbar{
-   width: 1rem;
-   height: .5rem;
-}
-
-html::-webkit-scrollbar-track{
-   background-color: transparent;
-}
-
-html::-webkit-scrollbar-thumb{
-   background-color: var(--main-color);
+   margin:0;
+   padding:0;
+   box-sizing:border-box;
 }
 
 body{
-   background-color: var(--light-bg);
-   padding-left: 30rem;
+   background: var(--light-bg);
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   height:100vh;
 }
 
-body.dark{
-   --light-color:#aaa;
-   --light-bg:#333;
-   --black:#fff;
-   --white:#222;
-   --border:.1rem solid rgba(255,255,255,.2);
-}
-
-body.active{
-   padding-left: 0;
-}
-
-section{
-   padding:2rem;
-   margin: 0 auto;
-   max-width: 1200px;
-}
-
-/* BUTTONS */
-.btn,
-.option-btn{
-   border-radius: .5rem;
-   color:#fff;
-   font-size: 1.8rem;
-   cursor: pointer;
-   text-transform: capitalize;
-   padding:1rem 3rem;
-   text-align: center;
-   margin-top: 1rem;
-   display: block;
-   width: 100%;
-}
-
-.btn{
-   background-color: var(--main-color);
-}
-
-.option-btn{
-   background-color:var(--orange);
-}
-
-.btn:hover,
-.option-btn:hover{
-   background-color: var(--black);
-   color: var(--white);
-}
-
-.flex-btn{
-   display: flex;
-   gap: 1rem;
+/* CHAT WRAPPER */
+.chat-box{
+   width:90%;
+   max-width:85rem;
+   height:80vh;
+   background:var(--white);
+   border:var(--border);
+   border-radius:1rem;
+   display:flex;
+   flex-direction:column;
+   overflow:hidden;
 }
 
 /* HEADER */
-.header{
-   position: sticky;
-   top:0; left:0; right: 0;
-   background-color: var(--white);
-   z-index: 1000;
-   border-bottom: var(--border);
-}
-
-.header .flex{
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   position: relative;
-   padding: 1.5rem 2rem;
-}
-
-.header .flex .logo{
-   font-size: 2.5rem;
-   color: var(--black);
-}
-
-.header .flex .search-form{
-   width: 50rem;
-   border-radius: .5rem;
-   background-color: var(--light-bg);
+.chat-header{
+   display:flex;
+   align-items:center;
+   gap:1rem;
    padding:1.5rem 2rem;
-   display: flex;
-   gap:2rem;
+   border-bottom:var(--border);
+   background:var(--white);
 }
 
-.header .flex .search-form input{
-   width: 100%;
-   font-size: 1.8rem;
-   color:var(--black);
-   background:none;
+.chat-header img{
+   width:5rem;
+   height:5rem;
+   border-radius:50%;
 }
 
-.header .flex .search-form button{
-   background:none;
-   font-size: 2rem;
-   cursor: pointer;
+.chat-header h3{
+   font-size:1.8rem;
    color:var(--black);
 }
 
-.header .flex .search-form button:hover{
-   color: var(--main-color);
-}
-
-.header .flex .icons div{
-   font-size: 2rem;
-   color:var(--black);
-   background-color: var(--light-bg);
-   border-radius: .5rem;
-   height: 4.5rem;
-   width: 4.5rem;
-   line-height: 4.5rem;
-   cursor: pointer;
-   text-align: center;
-   margin-left: .7rem;
-}
-
-.header .flex .icons div:hover{
-   background-color: var(--black);
-   color:var(--white);
-}
-
-.header .flex .profile{
-   position: absolute;
-   top:120%; right: 2rem;
-   background-color: var(--white);
-   border-radius: .5rem;
-   padding: 1.5rem;
-   text-align: center;
-   overflow: hidden;
-   transform-origin: top right;
-   transform: scale(0);
-   transition: .2s linear;
-   width: 30rem;
-}
-
-.header .flex .profile.active{
-   transform: scale(1);
-}
-
-.header .flex .profile .image{
-   height: 10rem;
-   width: 10rem;
-   border-radius: 50%;
-   object-fit: contain;
-   margin-bottom: 1rem;
-}
-
-.header .flex .profile .name{
-   font-size: 2rem;
-   color:var(--black);
-   overflow: hidden;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-}
-
-.header .flex .profile .role{
-   font-size: 1.8rem;
-   color: var(--light-color);
-}
-
-/* ICON CONTROL */
-#search-btn{
-   display: none;
-}
-
-/* SIDEBAR */
-.side-bar{
-   position: fixed;
-   top: 0; left: 0;
-   width: 30rem;
-   background-color: var(--white);
-   height: 100vh;
-   border-right: var(--border);
-   z-index: 1200;
-}
-
-.side-bar #close-btn{
-   text-align: right;
-   padding: 2rem;
-   display: none;
-}
-
-.side-bar #close-btn i{
-   font-size: 2.5rem;
-   background:var(--red);
-   border-radius: .5rem;
-   color:var(--white);
-   cursor: pointer;
-   height: 4.5rem;
-   width: 4.5rem;
-   line-height: 4.5rem;
-   text-align: center;
-}
-
-.side-bar #close-btn i:hover{
-   background-color: var(--black);
-}
-
-.side-bar .profile{
-   padding:3rem 2rem;
-   text-align: center;
-}
-
-.side-bar .profile .image{
-   height: 10rem;
-   width: 10rem;
-   border-radius: 50%;
-   object-fit: contain;
-   margin-bottom: 1rem;
-}
-
-.side-bar .profile .name{
-   font-size: 2rem;
-   color:var(--black);
-}
-
-.side-bar .profile .role{
-   font-size: 1.8rem;
-   color: var(--light-color);
-}
-
-.side-bar .navbar a{
-   display: block;
-   padding: 2rem;
-   font-size: 2rem;
-}
-
-.side-bar .navbar a i{
-   margin-right: 1.5rem;
-   color:var(--main-color);
-   transition: .2s linear;
-}
-
-.side-bar .navbar a span{
+.chat-header span{
+   font-size:1.3rem;
    color:var(--light-color);
 }
 
-.side-bar .navbar a:hover{
-   background-color: var(--light-bg);
+/* MESSAGES */
+.chat-messages{
+   flex:1;
+   padding:2rem;
+   background:var(--light-bg);
+   overflow-y:auto;
 }
 
-.side-bar .navbar a:hover i{
-   margin-right: 2.5rem;
+/* MESSAGE ROW */
+.msg{
+   display:flex;
+   align-items:flex-end;
+   margin-bottom:1.5rem;
+   gap:1rem;
 }
 
-.side-bar.active{
-   left: -30rem;
+/* PROFILE IMAGE */
+.msg img{
+   width:4rem;
+   height:4rem;
+   border-radius:50%;
 }
 
-/* RESPONSIVE */
-@media (max-width:1200px){
-   body{
-      padding-left: 0;
-   }
-
-   .side-bar{
-      left: -30rem;
-      transition: .2s linear;
-   }
-
-   .side-bar #close-btn{
-      display: block;
-   }
-
-   .side-bar.active{
-      left: 0;
-      box-shadow: 0 0 0 100vw rgba(0,0,0,.8);
-      border-right: 0;
-   }
+/* BUBBLE */
+.bubble{
+   max-width:60%;
+   padding:1rem 1.5rem;
+   border-radius:1rem;
+   font-size:1.5rem;
+   line-height:1.4;
 }
 
-@media (max-width:991px){
-   html{
-      font-size: 55%;
-   }
+/* TEACHER LEFT */
+.teacher{
+   justify-content:flex-start;
 }
 
-@media (max-width:768px){
-   #search-btn{
-      display: inline-block;
-   }
-
-   .header .flex .search-form{
-      position: absolute;
-      top: 99%; left: 0; right: 0;
-      border-top: var(--border);
-      border-bottom: var(--border);
-      background-color: var(--white);
-      border-radius: 0;
-      width: auto;
-      padding: 2rem;
-      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-      transition: .2s linear;
-   }
-
-   .header .flex .search-form.active{
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-   }
+.teacher .bubble{
+   background:var(--white);
+   border:var(--border);
+   color:var(--black);
 }
 
-@media (max-width:450px){
-   html{
-      font-size: 50%;
-   }
+/* STUDENT RIGHT */
+.student{
+   justify-content:flex-end;
+}
 
-   .flex-btn{
-      gap: 0;
-      flex-flow: column;
-   }
+.student .bubble{
+   background:var(--main-color);
+   color:var(--white);
+}
+
+/* INPUT AREA */
+.chat-input{
+   display:flex;
+   padding:1.5rem;
+   border-top:var(--border);
+   background:var(--white);
+   gap:1rem;
+}
+
+.chat-input input{
+   flex:1;
+   padding:1rem 1.5rem;
+   border:var(--border);
+   border-radius:.5rem;
+   font-size:1.5rem;
+   background:var(--light-bg);
+}
+
+.chat-input button{
+   padding:1rem 2rem;
+   border:none;
+   border-radius:.5rem;
+   background:var(--main-color);
+   color:var(--white);
+   font-size:1.5rem;
+   cursor:pointer;
+}
+
+.chat-input button:hover{
+   background:var(--black);
 }
 </style>
 
 </head>
+
 <body>
 
-<header class="header">
-   
-   <section class="flex">
+<div class="chat-box">
 
-      <a href="home.html" class="logo">Educa.</a>
-
-      <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
-      </form>
-
-      <div class="icons">
-         <div id="menu-btn" class="fas fa-bars"></div>
-         <div id="search-btn" class="fas fa-search"></div>
-         <div id="user-btn" class="fas fa-user"></div>
-         <div id="toggle-btn" class="fas fa-sun"></div>
+   <!-- HEADER -->
+   <div class="chat-header">
+      <img src="https://i.pravatar.cc/100?img=12">
+      <div>
+         <h3>Mr Smith</h3>
+         <span>Teacher</span>
       </div>
+   </div>
 
-      <div class="profile">
-         <img src="images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">shaikh anas</h3>
-         <p class="role">studen</p>
-         <a href="profile.html" class="btn">view profile</a>
-         <div class="flex-btn">
-            <a href="login.html" class="option-btn">login</a>
-            <a href="register.html" class="option-btn">register</a>
+   <!-- MESSAGES -->
+   <div class="chat-messages">
+
+      <div class="msg teacher">
+         <img src="https://i.pravatar.cc/100?img=12">
+         <div class="bubble">
+            Hi, do you need help with Module 4?
          </div>
       </div>
 
-   </section>
+      <div class="msg student">
+         <div class="bubble">
+            Yes — I’m stuck on APIs 😅
+         </div>
+         <img src="https://i.pravatar.cc/100?img=5">
+      </div>
 
-</header>   
+      <div class="msg teacher">
+         <img src="https://i.pravatar.cc/100?img=12">
+         <div class="bubble">
+            Let’s break it down step by step.
+         </div>
+      </div>
 
-<div class="side-bar">
-
-   <div id="close-btn">
-      <i class="fas fa-times"></i>
    </div>
 
-   <div class="profile">
-      <img src="images/pic-1.jpg" class="image" alt="">
-      <h3 class="name">shaikh anas</h3>
-      <p class="role">studen</p>
-      <a href="profile.html" class="btn">view profile</a>
+   <!-- INPUT -->
+   <div class="chat-input">
+      <input type="text" placeholder="Type a message...">
+      <button>Send</button>
    </div>
-
-   <nav class="navbar">
-      <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="about.html"><i class="fas fa-question"></i><span>about</span></a>
-      <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
-      <a href="teachers.html"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-      <a href="contact.html"><i class="fas fa-headset"></i><span>contact us</span></a>
-   </nav>
 
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
-
-   
 </body>
 </html>

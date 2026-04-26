@@ -53,3 +53,34 @@ def emailExists(email):
 
     con.close()
     return exists
+
+#--------------------------
+# Adding CLASSROOM messages / reply to database
+#--------------------------
+def add_Class_message(text):
+    con = sql.connect("database_Files/Database.db")
+    cur = con.cursor()
+
+    cur.execute("INSERT INTO class_message_board(message) values (?)", (text,))
+    con.commit()
+    con.close()
+
+def retrieve_Class_Message():
+    con = sql.connect("database_Files/Database.db")
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM INVENTORY;")
+    row = cur.fetchall()
+    con.close()
+    return row
+
+
+
+#-------------------------------------------------------------------------------------------------------------------
+def add_Class_reply(reply):
+    con = sql.connect("database_Files/Database.db")
+    cur = con.cursor()
+
+    cur.execute("INSERT INTO class_message_board(reply) values (?)" (reply))
+    con.close()
+

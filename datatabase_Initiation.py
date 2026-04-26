@@ -10,13 +10,33 @@ def init_db():
                     email TEXT NOT NULL UNIQUE,
                     password TEXT NOT NULL
                 ) """)
-    
+
     cur.execute("""
                 CREATE TABLE IF NOT EXISTS questions(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 question TEXT NOT NULL,
                 answer TEXT NOT NULL
                 ) """)
+
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS class_message_board(
+                message TEXT NOT NULL, 
+                reply TEXT
+                )""")
+
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS priv_message_board(
+                message TEXT NOT NULL, 
+                reply TEXT
+                )""")
+    
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS classroom(
+                school TEXT NOT NULL,
+                teacher TEXT NOT NULL, 
+                students TEXT
+                )""")
+
     con.commit()
     con.close()
 

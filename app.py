@@ -37,7 +37,7 @@ def FRONTPAGE():
     return render_template('GENERIC/FRONT-PAGE.html')
 
 
-@app.route('/HOMEPAGE')
+@app.route('/HOMEPAGE', methods ={"GET", "POST"})
 def HOMEPAGE():
     return render_template('GENERIC/HOME-PAGE.html')
 
@@ -63,7 +63,8 @@ def MODULES():
 
 @app.route('/MESSAGE_BOARD')
 def MESSAGE_BOARD():
-    return render_template('TEACHER/CLASSROOM_MESSAGE_BOARD.html')
+    messages = dbHandler.retrieve_Class_Message()
+    return render_template('TEACHER/CLASSROOM_MESSAGE_BOARD.html', text=messages)
 
 #----------------------------------------------
 # Login 
@@ -95,8 +96,11 @@ def LOGIN():
 def add_message():
     if request.method == "POST":
         text = request.form.get('message')
-        dbHandler.add_Class_message(text)
-        return render_template("TEACHER/CLASSROOM_MESSAGE_BOARD.html")
+        if text and text.strip():
+            dbHandler.add_Class_message(text.strip())
+
+        return redirect(url_for('MESSAGE_BOARD'))
+
 
 
 

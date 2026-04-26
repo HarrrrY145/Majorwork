@@ -206,14 +206,15 @@
 <!-- STUDENT MESSAGES -->
                 <div class="message-box">
                     <h6>Messages</h6>
-
+                    {% for row in text %}
                     <div class="media">
                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
                         <div class="media-body">
                             <strong>@username</strong> <!-- The username of the user -->
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo. <!-- Message from the SQL Database-->
+                            {{ row[0]}} <!-- Message from the SQL Database-->
                         </div>
                     </div>
+                    {% endfor %}
 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <!-- CHAT BOX -->

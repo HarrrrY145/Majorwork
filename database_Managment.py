@@ -28,7 +28,8 @@ def retreiveUser(displayName,email,inserted_password):
     if user is None: # No user found
         con.close()
         return False
-    
+
+
 #------------------------------
 # Checking the hashed passwords
 #------------------------------
@@ -69,10 +70,11 @@ def retrieve_Class_Message():
     con = sql.connect("database_Files/Database.db")
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM INVENTORY;")
-    row = cur.fetchall()
+    cur.execute("SELECT * FROM class_message_board;")
+    rows = cur.fetchall()
+
     con.close()
-    return row
+    return rows
 
 
 

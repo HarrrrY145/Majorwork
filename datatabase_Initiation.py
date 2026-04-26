@@ -39,5 +39,3 @@ def init_db():
 
     con.commit()
     con.close()
-
-    

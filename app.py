@@ -39,9 +39,37 @@ bcrypt = Bcrypt(app)
 def FRONTPAGE():
     return render_template('GENERIC/FRONT-PAGE.html')
 
+
+
+
+
 @app.route('/HOMEPAGE')
 def HOMEPAGE():
     return render_template('GENERIC/HOME-PAGE.html')
+
+@app.route('/PROGRESS_ANALYTICS')
+def PROGRESS_ANALYTICS():
+    return render_template('STUDENT/PROGRESS_ANALYTICS.html')
+
+@app.route('/CLASSROOM')
+def CLASSROOM():
+    return render_template('TEACHER/CLASSROOM.html')
+
+@app.route('/ACTIVITIES')
+def ACTIVITIES():
+    return render_template('STUDENT/ACTIVITIES.html')
+
+@app.route('/PRACTICE_TESTS')
+def PRACTICE_TESTS():
+    return render_template('STUDENT/PRACTICE_TESTS.html')
+
+@app.route('/MODULES')
+def MODULES():
+    return render_template('MODULES/MODULES.html')
+
+@app.route('/MESSAGE_BOARD')
+def MESSAGE_BOARD():
+    return render_template('TEACHER/MESSAGE_BOARD.html')
 
 #----------------------------------------------
 # Login 

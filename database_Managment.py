@@ -7,11 +7,11 @@ bcrypt = Bcrypt()
 #---------------- 
 # Inserting users
 #----------------
-def insertUser(displayName,email,hash):
-    con = sql.connect("database_Files/Database.db")
+def insertUser(displayName,email,password_hash,account_type):
+    con = sql.connect("database_Files/database.db")
     cur = con.cursor()
 
-    cur.execute("INSERT INTO users (displayName,email,password) VALUES (?,?,?)", (displayName, email, hash),)
+    cur.execute("INSERT INTO users (displayName,email,password,role) VALUES (?,?,?,?)", (displayName, email, password_hash, account_type),)
     con.commit()
     con.close()
 
@@ -19,33 +19,20 @@ def insertUser(displayName,email,hash):
 # Retreiving Users
 #-----------------
 def retreiveUser(displayName,email,inserted_password):
-    con = sql.connect("database_Files/Database.db")
+    con = sql.connect("database_Files/database.db")
     cur = con.cursor()
 
     cur.execute("SELECT * FROM users WHERE displayName == ? AND email == ?", (displayName,email)) 
     user = cur.fetchone()
 
-    if user is None: # No user found
-        con.close()
-        return False
+    con.close()
+    return user
 
-
-#------------------------------
-# Checking the hashed passwords
-#------------------------------
-    stored_hash = user[3]
-    if bcrypt.check_password_hash(stored_hash,inserted_password):
-        con.close()
-        return True
-    else:
-        con.close()
-        return False
-    
 #--------------------------
 # Checking exisiting emails
 #--------------------------
 def emailExists(email):
-    con = sql.connect("database_Files/Database.db")
+    con = sql.connect("database_Files/database.db")
     cur = con.cursor()
 
     query = "SELECT 1 FROM users WHERE EMAIL = ? LIMIT 1"
@@ -58,31 +45,24 @@ def emailExists(email):
 #--------------------------
 # Adding CLASSROOM messages / reply to database
 #--------------------------
-def add_Class_message(text):
-    con = sql.connect("database_Files/Database.db")
+def add_Class_message(class_id, user_id, text):
+    con = sql.connect("database_Files/database.db")
     cur = con.cursor()
 
-    cur.execute("INSERT INTO class_message_board(message) values (?)", (text,))
+    cur.execute("INSERT INTO class_message_board(class_id, user_id, message) values (?,?,?)", (class_id, user_id, text,))
     con.commit()
     con.close()
 
-def retrieve_Class_Message():
-    con = sql.connect("database_Files/Database.db")
+def retrieve_Class_Message(class_id):
+    con = sql.connect("database_Files/database.db")
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM class_message_board;")
+    cur.execute("SELECT * FROM class_message_board WHERE class_id = ?;" (class_id,))
     rows = cur.fetchall()
-
     con.close()
     return rows
 
 
 
 #-------------------------------------------------------------------------------------------------------------------
-def add_Class_reply(reply):
-    con = sql.connect("database_Files/Database.db")
-    cur = con.cursor()
-
-    cur.execute("INSERT INTO class_message_board(reply) values (?)" (reply))
-    con.close()
 

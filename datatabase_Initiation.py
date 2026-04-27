@@ -3,15 +3,12 @@ def init_db():
     con = sql.connect("database_files/database.db")
     cur = con.cursor()
 
-# USER TABLE
-
     cur.execute(""" 
                 CREATE TABLE IF NOT EXISTS users(
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     displayName TEXT NOT NULL,
                     email TEXT NOT NULL UNIQUE,
-                    password TEXT NOT NULL,
-                    account_type TEXT NOT NULL
+                    password TEXT NOT NULL
                 ) """)
 
     cur.execute("""
@@ -23,9 +20,12 @@ def init_db():
 
     cur.execute("""
                 CREATE TABLE IF NOT EXISTS class_message_board(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                class_id INTEGER NOT NULL,
-                user_id INTEGER NOT NULL,
+                message TEXT NOT NULL, 
+                reply TEXT
+                )""")
+
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS priv_message_board(
                 message TEXT NOT NULL, 
                 reply TEXT
                 )""")
@@ -39,3 +39,5 @@ def init_db():
 
     con.commit()
     con.close()
+
+

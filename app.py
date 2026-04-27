@@ -17,7 +17,6 @@ from flask_bcrypt import Bcrypt
 import datatabase_Initiation as dbInit
 import database_Managment as dbHandler
 
-
 app = Flask(__name__)
 
 #Creating the Database
@@ -56,9 +55,9 @@ def PRACTICE_TESTS():
 def MODULES():
     return render_template('MODULES/MODULES.html')
 
-@app.route('/MESSAGE_BOARD/<int:class_id>')
-def MESSAGE_BOARD(class_id):
-    messages = dbHandler.retrieve_Class_Message(class_id)
+@app.route('/MESSAGE_BOARD')
+def MESSAGE_BOARD():
+    messages = dbHandler.retrieve_Class_Message()
     return render_template('TEACHER/CLASSROOM_MESSAGE_BOARD.html', text=messages)
 
 #----------------------------------------------
@@ -71,22 +70,15 @@ def LOGIN():
         email=request.form["email"]
         inserted_password=request.form["password"]
 
-        user = dbHandler.retreiveUser(displayName,email)
-
-
-        #------------------------------
-        # Checking the hashed passwords
-        #------------------------------
-        if user and bcrypt.check_password_hash(user[3],inserted_password):
-            # User Session 
-            session["user_id"] = user[0]
-            session["role"] = user[4]
+        checked_user = dbHandler.retreiveUser(displayName,email,inserted_password)
+        
+        if checked_user:
             return redirect(url_for('HOMEPAGE'))
         else:
             return render_template('GENERIC/LOGIN.html')
     else:    
         return render_template('GENERIC/LOGIN.html')
-
+    
 
 
 
@@ -94,14 +86,12 @@ def LOGIN():
 # Class Message Board
 #----------------------------------------------
 # Adding texts to the database
-@app.route('/CLASSROOM_MESSAGE_BOARD/<int:class_id>', methods={"POST", "GET"})
-def add_message(class_id):
-
+@app.route('/CLASSROOM_MESSAGE_BOARD', methods={"POST", "GET"})
+def add_message():
     if request.method == "POST":
         text = request.form.get('message')
-
         if text and text.strip():
-            dbHandler.add_Class_message(class_id, session["user_id"], text.strip())
+            dbHandler.add_Class_message(text.strip())
 
         return redirect(url_for('MESSAGE_BOARD'))
 
@@ -149,7 +139,7 @@ def REGISTER():
 #--------------------------------------------------------------------
 # INSERTING INTO DATABASE
 #--------------------------------------------------------------------
-        dbHandler.insertUser(displayName,email,hash,account_type)
+        dbHandler.insertUser(displayName,email,hash)
         return render_template("GENERIC/FRONT-PAGE.html")
     else:
         return render_template("GENERIC/REGISTER.html")
@@ -161,5 +151,4 @@ if __name__ == '__main__':
     app.config["TEMPLATES_AUTO_RELOAD"] = True
     app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
     app.run(debug=True, host="0.0.0.0", port=8000)
-
 

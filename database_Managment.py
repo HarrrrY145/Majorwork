@@ -77,6 +77,25 @@ def retrieve_Class_Message():
     return rows
 
 
+#-------------------------------------------------------------------------------------------------------------------
+def recieve_multiple_choice():
+    con = sql.connect("database_Files/database.db")
+    cur = con.cursor()  
+
+    print("before insert")
+    cur.execute("INSERT INTO questions(question, answer) values ('This is a test qustion' , 'this is the test answer');")
+    #con.commit()
+    
+    cur.execute("SELECT * FROM questions;")
+    rows = cur.fetchall()
+    
+    con.close()
+    return rows
+
+
+
+
+
 
 #-------------------------------------------------------------------------------------------------------------------
 def add_Class_reply(reply):

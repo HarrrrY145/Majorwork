@@ -28,12 +28,12 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def FRONTPAGE():
-    return render_template('GENERIC/FRONT-PAGE.html')
+    return render_template('GENERIC/FRONT_PAGE.html')
 
 
 @app.route('/HOMEPAGE', methods ={"GET", "POST"})
 def HOMEPAGE():
-    return render_template('GENERIC/HOME-PAGE.html')
+    return render_template('GENERIC/HOME_PAGE.html')
 
 @app.route('/PROGRESS_ANALYTICS')
 def PROGRESS_ANALYTICS():
@@ -45,7 +45,9 @@ def CLASSROOM():
 
 @app.route('/ACTIVITIES')
 def ACTIVITIES():
-    return render_template('STUDENT/ACTIVITIES.html')
+    multiQ = dbHandler.recieve_multiple_choice()
+    print("Activities route run")
+    return render_template('STUDENT/ACTIVITIES.html',multiQ=multiQ)
 
 @app.route('/PRACTICE_TESTS')
 def PRACTICE_TESTS():
@@ -140,7 +142,7 @@ def REGISTER():
 # INSERTING INTO DATABASE
 #--------------------------------------------------------------------
         dbHandler.insertUser(displayName,email,hash)
-        return render_template("GENERIC/FRONT-PAGE.html")
+        return render_template("GENERIC/FRONT_PAGE.html")
     else:
         return render_template("GENERIC/REGISTER.html")
 

@@ -2,6 +2,16 @@
 
 {% block content %}
 <section class="home-page">
-    <h1> Activities</h1>
+        <div class="message-box">
+        <h6>ACTIVITIES</h6>
+        {% for row in multiQ %}
+        <body>
+            <br>
+            {{row[1]}} 
+            <br>
+            <br>
+            {{row[2]}}
+        </body> <!-- Message from the SQL Database-->
+        {% endfor %}
 </section>
 {% endblock %}

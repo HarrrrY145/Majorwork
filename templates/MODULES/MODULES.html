@@ -1,7 +1,213 @@
 {% extends 'GENERIC/LAYOUT.html' %}
 
 {% block content %}
-<section class="home-page">
-    <h1> Modules</h1>
+
+<style>
+.course-container{
+   padding: 2rem;
+}
+
+/* TITLE */
+.course-title{
+   font-size: 3rem;
+   color: var(--black);
+   margin-bottom: 2rem;
+}
+
+/* GRID - 2 ROWS x 3 COLUMNS (on desktop) */
+.course-grid{
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 2rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991px){
+   .course-grid{
+      grid-template-columns: repeat(2, 1fr);
+   }
+}
+
+@media (max-width: 600px){
+   .course-grid{
+      grid-template-columns: 1fr;
+   }
+}
+
+/* CARD */
+.course-card{
+   background: var(--white);
+   border: var(--border);
+   border-radius: 1.2rem;
+   padding: 2rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   transition: .3s ease;
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.05);
+   min-height: 26rem;
+}
+
+.course-card:hover{
+   transform: translateY(-6px);
+   border-color: var(--main-color);
+   box-shadow: 0 1.5rem 2.5rem rgba(0,0,0,.12);
+}
+
+/* ICON */
+.course-card i{
+   font-size: 3rem;
+   color: var(--main-color);
+   margin-bottom: 1rem;
+}
+
+/* TITLE */
+.course-card h3{
+   font-size: 2rem;
+   color: var(--black);
+   margin-bottom: 1rem;
+}
+
+/* DESCRIPTION */
+.course-card p{
+   font-size: 1.4rem;
+   color: var(--light-color);
+   line-height: 1.6;
+}
+
+/* FOOTER ACTIONS */
+.course-actions{
+   margin-top: 2rem;
+   display: flex;
+   gap: 1rem;
+}
+
+/* BUTTONS */
+.join-btn,
+.details-btn{
+   flex: 1;
+   padding: 1rem;
+   font-size: 1.4rem;
+   border-radius: .6rem;
+   cursor: pointer;
+   text-align: center;
+   transition: .2s ease;
+}
+
+/* JOIN */
+.join-btn{
+   background: var(--main-color);
+   color: #fff;
+}
+
+.join-btn:hover{
+   background: var(--black);
+}
+
+/* DETAILS */
+.details-btn{
+   background: var(--light-bg);
+   color: var(--black);
+   border: var(--border);
+}
+
+.details-btn:hover{
+   background: var(--orange);
+   color: #fff;
+}
+</style>
+
+<section class="course-container">
+
+   <h1 class="course-title">Software Modules</h1>
+
+   <div class="course-grid">
+
+      <!-- MODULE 1 -->
+      <div class="course-card">
+         <div>
+            <i class="fas fa-code"></i>
+            <h3>Fundamentals of Programming</h3>
+            <p>Learn logic, variables, loops and problem solving foundations.</p>
+         </div>
+
+         <div class="course-actions">
+            <a href="/join/1" class="join-btn">Join Course</a>
+            <a href="/module/1" class="details-btn">Details</a>
+         </div>
+      </div>
+
+      <!-- MODULE 2 -->
+      <div class="course-card">
+         <div>
+            <i class="fas fa-layer-group"></i>
+            <h3>Object-Oriented Programming</h3>
+            <p>Classes, objects, inheritance and real-world modelling.</p>
+         </div>
+
+         <div class="course-actions">
+            <a href="/join/2" class="join-btn">Join Course</a>
+            <a href="/module/2" class="details-btn">Details</a>
+         </div>
+      </div>
+
+      <!-- MODULE 3 -->
+      <div class="course-card">
+         <div>
+            <i class="fas fa-robot"></i>
+            <h3>Mechatronics</h3>
+            <p>Integrating hardware systems with software control logic.</p>
+         </div>
+
+         <div class="course-actions">
+            <a href="/join/3" class="join-btn">Join Course</a>
+            <a href="/module/3" class="details-btn">Details</a>
+         </div>
+      </div>
+
+      <!-- MODULE 4 -->
+      <div class="course-card">
+         <div>
+            <i class="fas fa-globe"></i>
+            <h3>Web Programming</h3>
+            <p>HTML, CSS and backend integration for web systems.</p>
+         </div>
+
+         <div class="course-actions">
+            <a href="/join/4" class="join-btn">Join Course</a>
+            <a href="/module/4" class="details-btn">Details</a>
+         </div>
+      </div>
+
+      <!-- MODULE 5 -->
+      <div class="course-card">
+         <div>
+            <i class="fas fa-shield-alt"></i>
+            <h3>Secure Software Architecture</h3>
+            <p>Authentication, encryption and safe system design.</p>
+         </div>
+
+         <div class="course-actions">
+            <a href="/join/5" class="join-btn">Join Course</a>
+            <a href="/module/5" class="details-btn">Details</a>
+         </div>
+      </div>
+
+      <!-- MODULE 6 -->
+      <div class="course-card">
+         <div>
+            <i class="fas fa-cogs"></i>
+            <h3>Software Automation</h3>
+            <p>Automating workflows, testing and deployment pipelines.</p>
+         </div>
+
+         <div class="course-actions">
+            <a href="/join/6" class="join-btn">Join Course</a>
+            <a href="/module/6" class="details-btn">Details</a>
+         </div>
+      </div>
+
+   </div>
 </section>
+
 {% endblock %}
